@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <style>
+        .message_error {
+            color: red;
+        }
+    </style>
 
     <h1>Select Model and Image</h1>
     <form action="/classifications_upload" method="post" novalidate
@@ -12,12 +17,20 @@
         <p>
             {{ form.model }}
         </p>
+        <br>
+
         <h4>
             Image:
         </h4>
-        <p>
-            <input type="file" name="file">
-        </p>
+        <div>
+            <input type="file" name="uploaded_image">
+
+            {% with messages = get_flashed_messages() %}
+                <p class="message_error">{{ messages[0] }}</p>
+            {% endwith %}
+
+        </div>
+        <br>
         <button type="submit" class="btn btn-dark mb-2">Submit</button>
     </form>
 {% endblock %}
