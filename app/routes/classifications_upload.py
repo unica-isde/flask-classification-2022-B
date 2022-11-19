@@ -30,21 +30,20 @@ def classifications_upload():
     form = ClassificationUploadForm()
     if request.method == "POST":  # POST
         model_id = form.model.data
-
-        # Check if the post request has the file part
+    
+        # Check if the POST request has the file parameter
         if 'uploaded_image' not in request.files:
+            flash('No file has been uploaded')
+            return redirect(request.url)
+        
+        # Check if a file has been uploaded
+        if request.files['uploaded_image'].filename == '':
             flash('No file has been uploaded')
             return redirect(request.url)
 
         file = request.files['uploaded_image']
-
-        # If user does not select file, browser also
-        # submit an empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
     
-        # Check if the user uploaded the file
+        # Security checks
         if file and allowed_file(file):
             file.filename = secure_filename(file.filename)
             image_id = save_image(file)
@@ -64,32 +63,44 @@ def classifications_upload():
                 )
                 task = q.enqueue_job(job)
 
-            # returns the image classification output from the specified model
-            # return render_template('classification_output.html', image_id=image_id, results=result_dict)
-            return render_template("classification_output_queue.html", image_id=image_id, jobID=task.get_id())
+                # returns the image classification output from the specified model
+                # return render_template('classification_output.html', image_id=image_id, results=result_dict)
+                return render_template("classification_output_queue.html", image_id=image_id, jobID=task.get_id())
+  
+        return redirect(request.url)
 
     return render_template('classification_upload.html', form=form)
 
 def save_image(file):
-    filename = 'uploaded_' + file.filename
+    """
+    Temporarily saves an uploaded image on the filesystem (/static/imagenet_subset), 
+    so that it can be classified
+    """
+    filename = 'uploaded_' + str(randint(0, 100000000)) + file.filename
     file.save(os.path.join('app/static/imagenet_subset/', filename))
     return filename
 
 def allowed_file(file):
+    """
+    Validates an uploaded images, in order to be sure that 
+    it is not a malicious file. Allowed files are JPEG, JPG, PNG 
+    """
     # Check Content-Type
-    reg = re.compile(r'^image\/(png|jpg|jpeg)', re.IGNORECASE)
+    print(file.content_type)
+    print(file.filename)
+    reg = re.compile(r'image\/(png|jpg|jpeg)', re.IGNORECASE)
     if not bool(reg.search(file.content_type)):
         return False
 
     # Check Extension
-    # allowed_extensions = ['jpg', 'png', 'jpeg']
-    # filename = file.filename
-    # while('.' in filename):
-    #     print(filename)
-    #     pair = os.path.splitext(filename)
-    #     if pair[1].lower() not in allowed_extensions:
-    #         return False
+    allowed_extensions = ['.jpg', '.png', '.jpeg']
+    filename = file.filename
+    while('.' in filename):
+        filename = os.path.splitext(filename)
+        if filename[1].lower() not in allowed_extensions:
+            flash('File not allowed, you can upload only JPG, PNG, JPEG files')
+            return False
 
-    #     filename = pair[0]
+        filename = filename[0]
     
     return True
