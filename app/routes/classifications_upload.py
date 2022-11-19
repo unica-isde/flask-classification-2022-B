@@ -1,6 +1,7 @@
 import redis
 import os 
 import re
+import time
 
 from random import randint
 from utils.utils import cleanup_temp_image
@@ -77,7 +78,7 @@ def save_image(file):
     Temporarily saves an uploaded image on the filesystem (/static/imagenet_subset), 
     so that it can be classified
     """
-    filename = 'uploaded_' + str(randint(0, 100000000)) + file.filename
+    filename = 'uploaded_' + str(time.time_ns())
     file.save(os.path.join('app/static/imagenet_subset/', filename))
     return filename
 
