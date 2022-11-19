@@ -66,8 +66,9 @@ def classifications_upload():
                 # returns the image classification output from the specified model
                 # return render_template('classification_output.html', image_id=image_id, results=result_dict)
                 return render_template("classification_output_queue.html", image_id=image_id, jobID=task.get_id())
-  
-        return redirect(request.url)
+        else:
+            flash('File not allowed, you can upload only JPG, PNG, JPEG files')
+            return redirect(request.url)
 
     return render_template('classification_upload.html', form=form)
 
@@ -86,8 +87,6 @@ def allowed_file(file):
     it is not a malicious file. Allowed files are JPEG, JPG, PNG 
     """
     # Check Content-Type
-    print(file.content_type)
-    print(file.filename)
     reg = re.compile(r'image\/(png|jpg|jpeg)', re.IGNORECASE)
     if not bool(reg.search(file.content_type)):
         return False
@@ -98,7 +97,6 @@ def allowed_file(file):
     while('.' in filename):
         filename = os.path.splitext(filename)
         if filename[1].lower() not in allowed_extensions:
-            flash('File not allowed, you can upload only JPG, PNG, JPEG files')
             return False
 
         filename = filename[0]
