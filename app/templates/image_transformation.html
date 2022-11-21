@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br/>
+    <h1>Set parameters and select an image</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <h4>
+            Color:
+        </h4>
+        <p>
+            {{ form.color }}
+        </p>
+        <h4>
+            Brightness:
+        </h4>
+        <p>
+            {{ form.brightness }}
+        </p>
+        <h4>
+            Contrast:
+        </h4>
+        <p>
+            {{ form.contrast }}
+        </p>
+
+        <h4>
+            Sharpness:
+        </h4>
+        <p>
+            {{ form.sharpness }}
+        </p>
+        <h4>
+            Image:
+        </h4>
+        <p>
+            {{ form.image }}
+        </p>
+        <button type="submit" class="btn btn-dark mb-2">Submit</button>
+    </form>
+{% endblock %}
