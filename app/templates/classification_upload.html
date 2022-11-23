@@ -6,31 +6,29 @@
             color: red;
         }
     </style>
-
+    <br>
     <h1>Select Model and Image</h1>
-    <form action="/classifications_upload" method="post" novalidate
-            enctype = "multipart/form-data">
-        {{ form.hidden_tag() }}
-        <h4>
-            Model:
-        </h4>
-        <p>
-            {{ form.model }}
-        </p>
-        <br>
-
-        <h4>
-            Image:
-        </h4>
+    <form action="/classifications_upload" method="post" novalidate enctype = "multipart/form-data">
+        {{ form.hidden_tag() }} 
+        
         <div>
+            <h4>Image:</h4>
+
             <input type="file" name="uploaded_image">
 
             {% with messages = get_flashed_messages() %}
                 <p class="message_error">{{ messages[0] }}</p>
             {% endwith %}
-
         </div>
         <br>
+        <div>
+            <h4>Model:</h4>
+            <p>
+                {{ form.model }}
+            </p>
+        </div> 
+        <br>
         <button type="submit" class="btn btn-dark mb-2">Submit</button>
+        
     </form>
 {% endblock %}

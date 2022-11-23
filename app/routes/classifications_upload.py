@@ -21,10 +21,10 @@ config = Configuration()
 def classifications_upload():
     """
     API that allows the user to upload an image and classify it.
-    The image is temporarily saved on the server and when the job 
-    is completed by the worker, it will be deleted.
-    The API checks if the user has actually uploaded an image and afterwards 
-    if it passes all security validations it is classified,
+    The image is temporarily saved on the server's storage. When
+    the job is completed by a worker, the image will be deleted.
+    The API checks if the user has actually uploaded an image and
+    afterwards if it passes all security validations it is classified,
     otherwise the page is reloaded showing a message error.
     """
 
@@ -78,7 +78,7 @@ def save_image(file):
     Temporarily saves an uploaded image on the filesystem (/static/imagenet_subset), 
     so that it can be classified
     """
-    filename = 'uploaded_' + str(time.time_ns())
+    filename = 'image_' + str(time.time_ns())
     file.save(os.path.join('app/static/imagenet_subset/', filename))
     return filename
 
