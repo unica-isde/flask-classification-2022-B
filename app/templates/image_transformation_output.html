@@ -25,7 +25,7 @@
             <h4>After transformation</h4>
             <div class="card">
                 <img class="half-image"
-                     src="{{ url_for('static', filename='imagenet_subset/transformation_' + image_id) }} "
+                     src="data:image/jpeg;charset=utf-8;base64,{{base64_image}}"
                      alt={{ transformation_image_id }}/>
             </div>
         </div>
