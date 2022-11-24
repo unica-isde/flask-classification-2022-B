@@ -3,3 +3,4 @@ from .classifications_id import *
 from .classifications_upload import *
 from .info import *
 from .home import *
+from .image_transformation import *
