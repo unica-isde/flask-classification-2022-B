@@ -47,19 +47,18 @@ def transform_image(image_id, color, brightness, contrast, sharpness):
 
     # Applies the color parameter
     enhancer_color = ImageEnhance.Color(image)
-    image_with_color = enhancer_color.enhance(color)
+    transformed_image = enhancer_color.enhance(color)
 
     # Applies the brightness parameter
-    enhancer_brightness = ImageEnhance.Brightness(image_with_color)
-    image_with_brightness = enhancer_brightness.enhance(brightness)
+    enhancer_brightness = ImageEnhance.Brightness(transformed_image)
+    transformed_image = enhancer_brightness.enhance(brightness)
 
     # Applies the contrast parameter
-    enhancer_contrast = ImageEnhance.Contrast(image_with_brightness)
-    image_with_contrast = enhancer_contrast.enhance(contrast)
+    enhancer_contrast = ImageEnhance.Contrast(transformed_image)
+    transformed_image = enhancer_contrast.enhance(contrast)
 
     # Applies the sharpness parameter
-    enhancer_sharpness = ImageEnhance.Sharpness(image_with_contrast)
-    image_with_sharpness = enhancer_sharpness.enhance(sharpness)
+    enhancer_sharpness = ImageEnhance.Sharpness(transformed_image)
+    transformed_image = enhancer_sharpness.enhance(sharpness)
 
-    transformed_image = image_with_sharpness
     return transformed_image
