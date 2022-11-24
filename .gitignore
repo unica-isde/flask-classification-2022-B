@@ -13,7 +13,9 @@ dist/
 build/
 *.egg-info/
 
+# IDE stuffs
 .idea
+.vscode
 
 # this should be downloaded during repo setup
 app/static/imagenet_subset
