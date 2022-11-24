@@ -18,7 +18,7 @@
             <div class="card">
                 <img class="half-image"
                      src="{{ url_for('static', filename='imagenet_subset/' + image_id) }} "
-                     alt={{ image_id }}/>
+                     alt="Original image"/>
             </div>
         </div>
         <div class="col">
@@ -26,7 +26,7 @@
             <div class="card">
                 <img class="half-image"
                      src="data:image/jpeg;charset=utf-8;base64,{{base64_image}}"
-                     alt={{ transformation_image_id }}/>
+                     alt="Image after transformation" />
             </div>
         </div>
     </div>
