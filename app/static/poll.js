@@ -17,7 +17,7 @@ function update(jobId) {
                 case "finished":
                     $('#spinner').hide();
                     $('#waitText').text("");
-                    makeGraph(data['data']);
+                    makeGraph(data['data'], jobId);
                     break;
                 case "started":
                     $('#waitText').text("Job started...");
@@ -39,14 +39,13 @@ function update(jobId) {
     });
 }
 
-
 $(document).ready(function () {
     var scripts = document.getElementById('polling');
     var jobID = scripts.getAttribute('jobid');
     update(jobID);
 });
 
-function makeGraph(results) {
+function makeGraph(results, jobId) {
     var ctx = document.getElementById("classificationOutput").getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'horizontalBar',
@@ -79,6 +78,17 @@ function makeGraph(results) {
                         beginAtZero: true
                     }
                 }]
+            },
+            animation: {
+                onComplete: function () {
+                    // Set the download plot button for downloading the chart
+                    document.getElementById("download-plot-btn").href = myChart.toBase64Image();
+                    document.getElementById("download-plot-btn").download = "results_" + jobId + ".png";
+
+                    // Set the buttons visibility to visible
+                    Array.from(document.getElementsByClassName('download-btn'))
+                        .forEach(element => element.style.visibility = "visible");
+                }
             }
         }
     });
