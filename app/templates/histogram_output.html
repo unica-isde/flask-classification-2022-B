@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <style>
+        .large-front-thumbnail {
+            position: relative;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+    </style>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <img class="large-front-thumbnail"
+                     id="image"
+                     src="{{ url_for('static', filename='imagenet_subset/'+image_id) }} "
+                     alt={{ image_id }}/>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card ">
+                <h3 id="title">Image histogram</h3>
+                <div class="row">
+                    <canvas id="histogramOutput"></canvas>
+                </div>
+
+                <a class="btn btn-dark" href="/histogram" role="button">Back</a>
+            </div>
+        </div>
+    </div>
+    <script id="script" src="{{ url_for("static", filename="histogram.js") }}" image_id="image"></script>
+{% endblock %}
