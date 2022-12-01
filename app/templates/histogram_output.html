@@ -3,34 +3,77 @@
 {% block content %}
 
     <style>
-        .large-front-thumbnail {
+        .outer-div{
+            width: 100%;
+            height: 100%;
+            display: table;
+        }
+
+        .inner-div{
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .half-image {
             position: relative;
-            max-width: 100%;
+            max-width: 50%;
             height: auto;
             display: block;
             margin: 0 auto;
         }
 
+        .title-histogram {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+        }
+
+        .histogram {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .padding20 {
+            padding: 20px;
+        }
+
+        .btn-back {
+            width: 100%;
+        }
+
+        .btn-back-div{
+            margin: 0 auto;
+        }
+
     </style>
+    <br>
     <div class="row">
         <div class="col">
-            <div class="card">
-                <img class="large-front-thumbnail"
-                     id="image"
-                     src="{{ url_for('static', filename='imagenet_subset/'+image_id) }} "
-                     alt={{ image_id }}/>
+            <div class="card outer-div">
+                <div class="inner-div">
+                    <img class="half-image"
+                         id="image"
+                         src="{{ url_for('static', filename='imagenet_subset/'+image_id) }} "
+                         alt={{ image_id }}/>
+                </div>
             </div>
         </div>
         <div class="col">
-            <div class="card ">
-                <h3 id="title">Image histogram</h3>
-                <div class="row">
-                    <canvas id="histogramOutput"></canvas>
+            <div class="card outer-div">
+                <div class="inner-div padding20">
+                    <h3 id="title" class="text-center title-histogram">Image histogram</h3>
+                    <br>
+                        <canvas id="histogramOutput" class="histogram"></canvas>
                 </div>
 
-                <a class="btn btn-dark" href="/histogram" role="button">Back</a>
             </div>
         </div>
     </div>
-    <script id="script" src="{{ url_for("static", filename="histogram.js") }}" image_id="image"></script>
+    <br>
+    <div class="row btn-back-div">
+        <a class="btn btn-dark btn-back" href="/histogram" role="button">Back</a>
+    </div>
+    <script id="script" src="{{ url_for('static', filename='histogram.js') }}" image_id="image"></script>
 {% endblock %}
