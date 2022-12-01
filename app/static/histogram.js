@@ -1,3 +1,8 @@
+/**
+ * This script renders the histogram of the image chosen by the user.
+ * After the original image is loaded on the output page, the functions
+ * below draw the image histogram in a canvas element.
+ */
 function processImage(inImg) {
   const width = inImg.width;
   const height = inImg.height;
