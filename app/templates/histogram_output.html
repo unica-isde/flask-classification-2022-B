@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-
     <style>
         .outer-div{
             width: 100%;
@@ -12,14 +11,6 @@
         .inner-div{
             display: table-cell;
             vertical-align: middle;
-        }
-
-        .half-image {
-            position: relative;
-            max-width: 50%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
         }
 
         .title-histogram {
@@ -47,33 +38,47 @@
             margin: 0 auto;
         }
 
+        .large-front-thumbnail {
+            position: relative;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
     </style>
+
     <br>
+
     <div class="row">
         <div class="col">
             <div class="card outer-div">
                 <div class="inner-div">
-                    <img class="half-image"
+                    <img class="large-front-thumbnail"
                          id="image"
                          src="{{ url_for('static', filename='imagenet_subset/'+image_id) }} "
                          alt={{ image_id }}/>
                 </div>
             </div>
         </div>
+
         <div class="col">
             <div class="card outer-div">
                 <div class="inner-div padding20">
                     <h3 id="title" class="text-center title-histogram">Image histogram</h3>
+                    
                     <br>
-                        <canvas id="histogramOutput" class="histogram"></canvas>
+                    
+                    <canvas id="histogramOutput" class="histogram"></canvas>
                 </div>
-
             </div>
         </div>
     </div>
+
     <br>
+    
     <div class="row btn-back-div">
         <a class="btn btn-dark btn-back" href="/histogram" role="button">Back</a>
     </div>
-    <script id="script" src="{{ url_for('static', filename='histogram.js') }}" image_id="image"></script>
+    
+    <script src="{{ url_for('static', filename='histogram.js') }}"></script>
 {% endblock %}

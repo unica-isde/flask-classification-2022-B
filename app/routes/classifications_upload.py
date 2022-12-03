@@ -27,7 +27,6 @@ def classifications_upload():
     afterwards if it passes all security validations it is classified,
     otherwise the page is reloaded showing a message error.
     """
-
     form = ClassificationUploadForm()
     if request.method == "POST":  # POST
         model_id = form.model.data
@@ -45,9 +44,9 @@ def classifications_upload():
         file = request.files['uploaded_image']
     
         # Security checks
-        if file and allowed_file(file):
+        if file and _allowed_file(file):
             file.filename = secure_filename(file.filename)
-            image_id = save_image(file)
+            image_id = _save_image(file)
 
             redis_url = Configuration.REDIS_URL
             redis_conn = redis.from_url(redis_url)
@@ -66,14 +65,19 @@ def classifications_upload():
 
                 # returns the image classification output from the specified model
                 # return render_template('classification_output.html', image_id=image_id, results=result_dict)
-                return render_template("classification_output_queue.html", image_id=image_id, jobID=task.get_id())
+                return render_template(
+                    "classification_output_queue.html", 
+                    image_id=image_id, 
+                    jobID=task.get_id())
         else:
             flash('File not allowed, you can upload only JPG, PNG, JPEG files')
             return redirect(request.url)
 
-    return render_template('classification_upload.html', form=form)
+    return render_template(
+        'classification_upload.html', 
+        form=form)
 
-def save_image(file):
+def _save_image(file):
     """
     Temporarily saves an uploaded image on the filesystem (/static/imagenet_subset), 
     so that it can be classified
@@ -82,7 +86,7 @@ def save_image(file):
     file.save(os.path.join('app/static/imagenet_subset/', filename))
     return filename
 
-def allowed_file(file):
+def _allowed_file(file):
     """
     Validates an uploaded images, in order to be sure that 
     it is not a malicious file. Allowed files are JPEG, JPG, PNG 

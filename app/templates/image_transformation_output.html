@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-
     <style>
         .half-image {
             position: relative;
-            max-width: 50%;
+            max-width: 100%;
             height: auto;
             display: block;
             margin: 0 auto;
         }
     </style>
+
     <br/>
+    
     <div class="row">
         <div class="col">
             <h4>Original</h4>
@@ -21,6 +22,7 @@
                      alt="Original image"/>
             </div>
         </div>
+    
         <div class="col">
             <h4>After transformation</h4>
             <div class="card">
@@ -30,7 +32,9 @@
             </div>
         </div>
     </div>
+
     <br/>
+
     <div class="row">
         <div class="col">
             <h4>Parameters</h4>
@@ -56,11 +60,12 @@
             </div>
         </div>
     </div>
+
     <br/>
+    
     <div class="row">
         <div class="col">
             <a class="btn btn-primary" href="/image-transformation" role="button">Back</a>
         </div>
     </div>
-
 {% endblock %}

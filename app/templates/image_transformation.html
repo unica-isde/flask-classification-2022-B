@@ -2,7 +2,9 @@
 
 {% block content %}
     <br/>
+
     <h1>Set parameters and select an image</h1>
+    
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <h4>
@@ -14,6 +16,7 @@
                 <span style="color: red">{{ err }}</span>
             {% endfor %}
         </p>
+    
         <h4>
             Brightness:
         </h4>
@@ -23,6 +26,7 @@
                 <span style="color: red">{{ err }}</span>
             {% endfor %}
         </p>
+    
         <h4>
             Contrast:
         </h4>
@@ -42,6 +46,7 @@
                 <span style="color: red">{{ err }}</span>
             {% endfor %}
         </p>
+    
         <h4>
             Image:
         </h4>
@@ -51,6 +56,9 @@
                 <span style="color: red">{{ err }}</span>
             {% endfor %}
         </p>
+
+        <br>
+        
         <button type="submit" class="btn btn-dark mb-2">Submit</button>
     </form>
 {% endblock %}

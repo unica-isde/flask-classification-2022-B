@@ -14,7 +14,6 @@ def image_transformation():
     if GET  -> returns the form to select the image and insert parameters
     if POST -> returns the result of the transformation
     """
-
     form = ImageTransformationForm()
     if form.validate_on_submit():
         # Form values
@@ -25,7 +24,7 @@ def image_transformation():
         image_id = form.image.data
 
         # Image transformation
-        transformed_image = transform_image(image_id, color, brightness, contrast, sharpness)
+        transformed_image = _transform_image(image_id, color, brightness, contrast, sharpness)
 
         # Convert image to base64
         byte_image = io.BytesIO()
@@ -33,13 +32,22 @@ def image_transformation():
         base64_image = base64.b64encode(byte_image.getvalue()).decode()
 
         # Returns the output
-        return render_template("image_transformation_output.html", image_id=image_id, color=color,
-                               brightness=brightness, contrast=contrast, sharpness=sharpness, base64_image=base64_image)
+        return render_template(
+            "image_transformation_output.html", 
+            image_id=image_id, 
+            color=color,
+            brightness=brightness, 
+            contrast=contrast, 
+            sharpness=sharpness, 
+            base64_image=base64_image)
+    
     # Returns the form to be compiled
-    return render_template('image_transformation.html', form=form)
+    return render_template(
+        'image_transformation.html', 
+        form=form)
 
 
-def transform_image(image_id, color, brightness, contrast, sharpness):
+def _transform_image(image_id, color, brightness, contrast, sharpness):
     """
     Applies the parameters (color, brightness, contrast, sharpness) to the image
     """

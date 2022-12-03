@@ -8,7 +8,8 @@ conf = Configuration()
 
 @app.route('/histogram', methods=['GET', 'POST'])
 def histogram():
-    """API for selecting an image and returning
+    """
+    API for selecting an image and returning
     the view page of the image histogram.
     """
     form = HistogramForm()

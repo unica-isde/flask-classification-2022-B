@@ -82,23 +82,16 @@ function processImage(inImg) {
   }
 }
 
-function getImageData(image_data) {
+function getImageData(image_id) {
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d');
-  const img = document.getElementById(image_data);
+  const img = document.getElementById(image_id);
   canvas.width = img.width;
   canvas.height = img.height;
   context.drawImage(img, 0, 0);
   return context.getImageData(0, 0, img.width, img.height);
 }
 
-function printHistogram() {
-  script = document.getElementById("script");
-  image = script.getAttribute("image_id");
-  setTimeout(
-      processImage(getImageData(image)),
-      50
-  );
-}
-
-$(window).on("load", printHistogram)
+$("#image").load(function() {
+  processImage(getImageData("image"))
+})

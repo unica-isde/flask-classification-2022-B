@@ -10,7 +10,9 @@
             margin: 0 auto;
         }
     </style>
+
     <br>
+    
     <div class="row">
         <div class="col">
             <div class="card">
@@ -19,6 +21,7 @@
                      alt={{ image_id }}/>
             </div>
         </div>
+
         <div class="col">
             <div class="card">
                 <div class="row">
@@ -34,8 +37,8 @@
             </div>
         </div>
     </div>
-    <script src="{{ url_for("static", filename="poll.js") }}" id="polling" jobid={{ jobID }}></script>
 
+    <script src="{{ url_for("static", filename="poll.js") }}" id="polling" jobid={{ jobID }}></script>
 {% endblock %}
 
 

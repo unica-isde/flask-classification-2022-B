@@ -10,4 +10,9 @@ def cleanup_temp_image(job, connection, result, *args, **kwargs):
     a job. It removes the image, which was temporary saved on the
     server during upload phase, associated to the job 
     """
-    os.remove(os.path.join(conf.image_folder_path, job.kwargs['img_id']))
+    os.remove(
+        os.path.join(
+            conf.image_folder_path, 
+            job.kwargs['img_id']
+        )
+    )
