@@ -9,8 +9,12 @@
             display: block;
             margin: 0 auto;
         }
-    </style>
 
+        .download-btn{
+            visibility: hidden;
+        }
+    </style>
+    
     <br>
     
     <div class="row">
@@ -33,6 +37,13 @@
                     </div>
                 </div>
 
+                <br>
+                <a class="btn btn-dark download-btn" href={{ url_for("export_json", job_id=jobID) }} role="button">Download JSON results</a>
+                
+                <br>
+                <a class="btn btn-dark download-btn" id="download-plot-btn" role="button" >Download Plot results</a>
+                
+                <br>
                 <a class="btn btn-dark" role="button" href="" onclick="location.replace(window.location.href)">Back</a>
             </div>
         </div>

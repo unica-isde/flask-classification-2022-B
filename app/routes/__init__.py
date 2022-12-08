@@ -5,3 +5,4 @@ from .info import info
 from .home import home
 from .histogram import histogram
 from .image_transformation import image_transformation
+from .export_json import export_json
