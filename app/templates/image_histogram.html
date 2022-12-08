@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        .large-front-thumbnail {
+            position: relative;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+
+    <br>
+
+    <h1>Select Image</h1>
+    
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <h4>
+            Image:
+        </h4>
+        
+        <p>
+            {{ form.image }}
+        </p>
+
+        <br>
+        
+        <button type="submit" id="input" class="btn btn-dark mb-2">Submit</button>
+    </form>
+
+
+{% endblock %}

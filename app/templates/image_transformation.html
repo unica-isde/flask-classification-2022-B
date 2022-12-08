@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br/>
+
+    <h1>Set parameters and select an image</h1>
+    
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <h4>
+            Color:
+        </h4>
+        <p>
+            {{ form.color }}
+            {% for err in form.color.errors %}
+                <span style="color: red">{{ err }}</span>
+            {% endfor %}
+        </p>
+    
+        <h4>
+            Brightness:
+        </h4>
+        <p>
+            {{ form.brightness }}
+            {% for err in form.brightness.errors %}
+                <span style="color: red">{{ err }}</span>
+            {% endfor %}
+        </p>
+    
+        <h4>
+            Contrast:
+        </h4>
+        <p>
+            {{ form.contrast }}
+            {% for err in form.contrast.errors %}
+                <span style="color: red">{{ err }}</span>
+            {% endfor %}
+        </p>
+
+        <h4>
+            Sharpness:
+        </h4>
+        <p>
+            {{ form.sharpness }}
+            {% for err in form.sharpness.errors %}
+                <span style="color: red">{{ err }}</span>
+            {% endfor %}
+        </p>
+    
+        <h4>
+            Image:
+        </h4>
+        <p>
+            {{ form.image }}
+            {% for err in form.image.errors %}
+                <span style="color: red">{{ err }}</span>
+            {% endfor %}
+        </p>
+
+        <br>
+        
+        <button type="submit" class="btn btn-dark mb-2">Submit</button>
+    </form>
+{% endblock %}
