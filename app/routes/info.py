@@ -1,5 +1,5 @@
 from app import app
-from app.utils.list_images import list_images
+from app.utils import list_images
 from config import Configuration
 
 

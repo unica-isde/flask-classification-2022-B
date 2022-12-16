@@ -13,9 +13,11 @@ config = Configuration()
 
 @app.route('/classifications', methods=['GET', 'POST'])
 def classifications():
-    """API for selecting a model and an image and running a 
+    """
+    API for selecting a model and an image and running a 
     classification job. Returns the output scores from the 
-    model."""
+    model.
+    """
     form = ClassificationForm()
     if form.validate_on_submit():  # POST
         image_id = form.image.data
@@ -33,8 +35,13 @@ def classifications():
 
         # returns the image classification output from the specified model
         # return render_template('classification_output.html', image_id=image_id, results=result_dict)
-        return render_template("classification_output_queue.html", image_id=image_id, jobID=task.get_id())
+        return render_template(
+            "classification_output_queue.html", 
+            image_id=image_id, 
+            jobID=task.get_id())
 
     # otherwise, it is a get request and should return the
     # image and model selector
-    return render_template('classification_select.html', form=form)
+    return render_template(
+        'classification_select.html', 
+        form=form)
